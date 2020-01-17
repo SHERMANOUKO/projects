@@ -1,0 +1,46 @@
+<div id="login">
+    <div class="container">
+        <img class="logo" src="/assets/images/logo.png">
+    </div>
+    <div class="container" id="top">
+        <hr>
+        <h5 class="text text-center text-info"><strong>WELCOME TO PLOTSAPP SELLER PORTAL</strong></h5>
+        <hr>
+    </div>
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3 text-center" id="formContainer">
+                <div *ngIf="!response" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Invalid!</strong> Invalid username or password.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-rounded" id="logUsername" formControlName = "userEmail" [ngClass] = "{'is-invalid': submitted && f.userEmail.errors}" placeholder="Username"  aria-describedby="user">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <div *ngIf="submitted && f.userEmail.errors" class="invalid-feedback">
+                            <div *ngIf="f.userEmail.errors.required">Username is required</div>
+                        </div>
+                    </div> <br> <br>
+                    <div class="input-group">
+                        <input type="password" class="form-control" formControlName="userPassword" [ngClass]="{ 'is-invalid':submitted && f.userPassword.errors}" id="logPassword" placeholder="Password">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <div *ngIf="submitted && f.userPassword.errors" class="invalid-feedback">
+                            <div *ngIf="f.userPassword.errors.required">Password is required</div>
+                        </div>    
+                    </div><br><br>
+                    <p>
+                        <a href="/">Forgot password?</a> 
+                        <button type="submit" class="btn btn-success float-right">Sign in</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>          
+</div>

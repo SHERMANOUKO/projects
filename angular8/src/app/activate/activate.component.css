@@ -1,0 +1,12 @@
+#activateFormHolder{
+    min-height: 200px;
+}
+
+.logo{
+    width: 30%;
+    height: 50%;
+    margin-top: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

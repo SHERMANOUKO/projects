@@ -1,0 +1,29 @@
+#content{
+    min-height:80vh
+}
+
+.scroll {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#mapHolder{
+    margin-bottom: 2%;
+}
+
+agm-map {
+    height: 600px;
+    width: 100%;
+}
+
+#clickable{
+    cursor: pointer;
+}
+
+mat-icon{
+    float: left;
+}
+
+ul {
+    list-style-type: none;
+}

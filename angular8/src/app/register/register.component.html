@@ -1,0 +1,335 @@
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+
+<div class="container-fluid" id="register">
+    
+    <div class="row">
+        <div class="col-sm-6" id="terms" >
+            <h2>Terms and Conditions:</h2>
+            <p>
+                Using our Services does not give you ownership of any intellectual property rights in our Services or the content you access. 
+                You may not use content from our Services unless you obtain permission from its owner or are otherwise permitted by law.
+                    These terms do not grant you the right to use any branding or logos used in our Services. 
+                Don’t remove, obscure, or alter any legal notices displayed in or along with our Services.Our Services display some content that is not Google’s. 
+                This content is the sole responsibility of the entity that makes it available.
+            </p>
+            <a href="/register"class=" float-right">Read More...</a>
+            <br>
+            <h2>Data Privacy:</h2>
+            <p>
+                    White Fuse has created this data protection policy template as a foundation for smaller organizations to create a working data protection policy in accordance with the EU General Data Protection Regulation. 
+                    The word doc format offers the ability for organizations to customize the policy.
+                    Build and maintain a data governance system, including establishing leadership 
+                    (where appropriate, a data protection officer, setting forth policies and training personnel.)
+            </p>
+            <a href="/register"class=" float-right">Read More...</a>
+        </div>
+
+        <div class="col-sm-6" >
+            <div id="reg" class="col-md-12">
+                <div class="container">
+                    <img class="logo" src="/assets/images/logo.png">
+                </div>
+                <hr>
+                <h4 class="text text-center"><strong>Register And Sell !!!</strong></h4>
+                <div class="row" id="formButtons">
+                    <button (click)="resume()" type="button" class="btn btn-sm btn-primary" style="display: block;width: 50%;">Individual</button>
+                    <button (click)="toggle()" type="button" class="btn btn-sm btn-warning float-right" style="display: block;width: 50%;">Company</button>
+                </div>
+                <hr>
+                <div *ngIf="registerMessage && succesful === true" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Successful!</strong>{{registerMessage}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div *ngIf="registerMessage && succesful === false" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Successful!</strong> {{registerMessage}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div *ngIf="show_individual" id="individualRegistration" class="content-one" ng-show="content == 1">
+                    <h6 class="text text-center">Individual Registration</h6> <hr>
+                    <div>
+                        <form id="individualRegistrationForm"  [formGroup]="individualRegisterForm" >
+                            <div class="form-group ">
+                                <div class="input-group">
+                                    <input type="text" formControlName="inFullName" [ngClass]="{ 'is-invalid': submitted && fi.inFullName.errors }" class="form-control" id="" placeholder="Full Name">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <div *ngIf="submitted && fi.inFullName.errors" class="invalid-feedback">
+                                        <div *ngIf="fi.inFullName.errors.required">Full Name is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" formControlName="inNationalID" [ngClass]="{ 'is-invalid': submitted && fi.inNationalID.errors }" class="form-control" id="inNationalID" placeholder="National ID">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">#</span>
+                                    </div>
+                                    <div *ngIf="submitted && fi.inNationalID.errors" class="invalid-feedback">
+                                        <div *ngIf="fi.inNationalID.errors.required">ID number is required.</div>
+                                        <div *ngIf="fi.inNationalID.errors.pattern">Enter a valid ID Number.</div>
+                                        <div *ngIf="fi.inNationalID.errors.minLength">ID Number is too short.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" formControlName="inEmail" [ngClass]="{ 'is-invalid': submitted && fi.inEmail.errors }" class="form-control" id="inEmail" placeholder="Email">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <div *ngIf="submitted && fi.inEmail.errors" class="invalid-feedback">
+                                        <div *ngIf="fi.inEmail.errors.required">Email is required.</div>
+                                        <div *ngIf="fi.inEmail.errors.pattern">Invalid Email Address.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="inPhoneNumber" [ngClass]="{ 'is-invalid': submitted && fi.inPhoneNumber.errors }" id="inPhoneNumber" placeholder="Phone Number">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <div *ngIf="submitted && fi.inPhoneNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="fi.inPhoneNumber.errors.required">Phone Number is required.</div>
+                                        <div *ngIf="fi.inPhoneNumber.errors.pattern">Enter a valid Phone Number.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="inCounty" id="inCounty" formControlName="inCounty" [ngClass]="{ 'is-invalid': submitted && fi.inCounty.errors }">
+                                    <option value="" disabled selected>County</option>
+                                    <option value='baringo'>Baringo</option>
+                                    <option value='bomet'>Bomet</option>
+                                    <option value='bungoma'>Bungoma</option>
+                                    <option value='busia'>Busia</option>
+                                    <option value='elgeyo-Marakwet'>Elgeyo-Marakwet</option>
+                                    <option value='embu'>Embu</option>
+                                    <option value='garissa'>Garissa</option>
+                                    <option value='homa Bay'>Homa Bay</option>
+                                    <option value='isiolo'>Isiolo</option>
+                                    <option value='kajiado'>Kajiado</option>
+                                    <option value='kakamega'>Kakamega</option>
+                                    <option value='kericho'>Kericho</option>
+                                    <option value='kiambu'>Kiambu</option>
+                                    <option value='kilifi'>Kilifi</option>
+                                    <option value='kirinyaga'>Kirinyaga</option>
+                                    <option value='kisii'>Kisii</option>
+                                    <option value='kisumu'>Kisumu</option>
+                                    <option value='kitui'>Kitui</option>
+                                    <option value='kwale'>Kwale</option>
+                                    <option value='laikipia'>Laikipia</option>
+                                    <option value='lamu'>Lamu</option>
+                                    <option value='machakos'>Machakos</option>
+                                    <option value='makueni'>Makueni</option>
+                                    <option value='mandera'>Mandera</option>
+                                    <option value='marsabit'>Marsabit</option>
+                                    <option value='meru'>Meru</option>
+                                    <option value='migori'>Migori</option>
+                                    <option value='mombasa'>Mombasa</option>
+                                    <option value='muranga'>Murang'a</option>
+                                    <option value='nairobi'>Nairobi City</option>
+                                    <option value='nakuru'>Nakuru</option>
+                                    <option value='nandi'>Nandi</option>
+                                    <option value='narok'>Narok</option>
+                                    <option value='nyamira'>Nyamira</option>
+                                    <option value='nyandarua'>Nyandarua</option>
+                                    <option value='nyeri'>Nyeri</option>
+                                    <option value='samburu'>Samburu</option>
+                                    <option value='siaya'>Siaya</option>
+                                    <option value='taita-Taveta'>Taita-Taveta</option>
+                                    <option value='tana River'>Tana River</option>
+                                    <option value='tharaka-Nithi'>Tharaka-Nithi</option>
+                                    <option value='trans Nzoia'>Trans Nzoia</option>
+                                    <option value='turkana'>Turkana</option>
+                                    <option value='uasin Gishu'>Uasin Gishu</option>
+                                    <option value='vihiga'>Vihiga</option>
+                                    <option value='west Pokot'>West Pokot</option>
+                                    <option value='wajir'>Wajir</option>
+                                </select>
+                                <div *ngIf="submitted && fi.inCounty.errors" class="invalid-feedback">
+                                    <div *ngIf="fi.inCounty.errors.required">County is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inPassport">Passport photo:</label>
+                                <input type="file" (change)="onSelect($event,inPassport)" #inPassport  class="form-control-file" id="inPassport" formControlName="inPassport" placeholder="Passport photo" [ngClass]="{ 'is-invalid': submitted && fi.inPassport.errors }">
+                                <div *ngIf="submitted && fi.inPassport.errors" class="invalid-feedback">
+                                    <div *ngIf="fi.inPassport.errors.required">Passport photo is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inIdFront">ID image (front):</label>
+                                <input type="file" (change)="onSelect($event,inIdFront)" #inIdFront class="form-control-file" id="inIdFront" placeholder="ID IMAGE (FRONT)" [ngClass]="{ 'is-invalid': submitted && fi.inIdFront.errors }" formControlName="inIdFront">
+                                <div *ngIf="submitted && fi.inIdFront.errors" class="invalid-feedback">
+                                    <div *ngIf="fi.inIdFront.errors.required">ID Front Side photo is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inIdBack">ID image (back):</label>
+                                <input type="file" class="form-control-file" (change)="onSelect($event,inIdBack)" #inIdBack id="inIdBack" placeholder="ID IMAGE (BACK)" formControlName="inIdBack" [ngClass]="{ 'is-invalid': submitted && fi.inIdBack.errors }">
+                                <div *ngIf="submitted && fi.inIdBack.errors" class="invalid-feedback">
+                                    <div *ngIf="fi.inIdBack.errors.required">ID back side photo is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" class="form-control"  id="inPassword" placeholder="Password" formControlName="inPassword" [ngClass]="{ 'is-invalid': submitted && fi.inPassword.errors }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <div *ngIf="submitted && fi.inPassword.errors" class="invalid-feedback">
+                                        <div *ngIf="fi.inPassword.errors.required">Password is required.</div>
+                                        <div *ngIf="fi.inPassword.errors.pattern">Password should have an uppercase, lowercase, special character and a number and be at least 8 characters long.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="inConfirmPassword" placeholder="Confirm password" formControlName="inConfirmPassword" [ngClass]="{ 'is-invalid': submitted && fi.inConfirmPassword.errors }">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="border-radius: 2px">$</span>
+                                    </div>
+                                    <div *ngIf="submitted && fi.inConfirmPassword.errors" class="invalid-feedback">
+                                        <div *ngIf="fi.inConfirmPassword.errors.required">Confirm password is required.</div>
+                                        <div *ngIf="fi.inConfirmPassword.errors.pattern">Passwords must match.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="formButtons">
+                                <input type="submit" value="Submit" (click)="onSubmitIndividual()" class="btn  btn-sm btn-success" style="display: block;width: 50%;">
+                                <input type="reset" value="Reset" class="btn btn-sm btn-danger float-right" style="display: block;width: 50%;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div *ngIf="show_company" id="companyRegistration" class="content-two" ng-show="content == 2">
+                    <h6 class="text text-center">Company Registration</h6> <hr>
+                    <div>
+                        <form id="companyRegistrationForm" [formGroup]="companyRegisterForm" >
+                            <div class="form-group ">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="companyName" [ngClass]="{ 'is-invalid': companySubmitted && fc.companyName.errors }" id="companyName" placeholder="Company Name">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.companyName.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.companyName.errors.required">Company name is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="companyCeoName" [ngClass]="{ 'is-invalid': companySubmitted && fc.companyCeoName.errors }" id="companyCeoName" placeholder="Company CEO Name">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.companyCeoName.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.companyCeoName.errors.required">Company CEO name is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" formControlName="companyEmail" [ngClass]="{ 'is-invalid': companySubmitted && fc.companyEmail.errors }" class="form-control" id="companyEmail" placeholder="Company Email">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.companyEmail.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.companyEmail.errors.required">Company Email is required.</div>
+                                        <div *ngIf="fc.companyEmail.errors.pattern">Invalid Email Address.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="companyPhoneNo" [ngClass]="{ 'is-invalid': companySubmitted && fc.companyPhoneNo.errors }" id="companyPhoneNo" placeholder="Company Phone Number">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.companyPhoneNo.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.companyPhoneNo.errors.required">Company Phone Number is required.</div>
+                                        <div *ngIf="fc.companyPhoneNo.errors.pattern">Invalid Phone Number.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="companyRegistrationNo" [ngClass]="{ 'is-invalid': companySubmitted && fc.companyRegistrationNo.errors }" id="companyRegistrationNo" placeholder="Company registration number">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.companyRegistrationNo.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.companyRegistrationNo.errors.required">Company registration number is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="companyIncorporationYear" formControlName="companyIncorporationYear" [ngClass]="{ 'is-invalid': companySubmitted && fc.companyIncorporationYear.errors }" placeholder="Year of company incorporation">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">#</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.companyIncorporationYear.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.companyIncorporationYear.errors.required">Company Incorporation Year is required.</div>
+                                        <div *ngIf="fc.companyIncorporationYear.errors.pattern">Invalid Year.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" formControlName="companyKraPin" [ngClass]="{ 'is-invalid': companySubmitted && fc.companyKraPin.errors }" id="companyKraPin" placeholder="Enter company kra pin">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">#</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.companyKraPin.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.companyKraPin.errors.required">Company KRA pin is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" class="form-control"  id="userPassword" formControlName="userPassword" [ngClass]="{ 'is-invalid': companySubmitted && fc.userPassword.errors }" placeholder="Password">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.userPassword.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.userPassword.errors.required">Password is required.</div>
+                                        <div *ngIf="fc.userPassword.errors.pattern">Password should have an uppercase, lowercase, special character and a number and be at least 8 characters long.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="userConfirmPassword" formControlName="userConfirmPassword" [ngClass]="{ 'is-invalid': companySubmitted && fc.userConfirmPassword.errors }" placeholder="Confirm password">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" style="border-radius: 2px">$</span>
+                                    </div>
+                                    <div *ngIf="companySubmitted && fc.userConfirmPassword.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.userConfirmPassword.errors.required">Confirm password is required.</div>
+                                        <div *ngIf="fc.userConfirmPassword.errors.pattern">Passwords must match.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="formButtons">
+                                <input type="submit" (click)="onSubmitCompany()" value="Submit" class="btn  btn-sm btn-success" style="display: block;width: 50%;">
+                                <input type="reset" value="Reset" class="btn btn-sm btn-danger float-right" style="display: block;width: 50%;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="mobileTerms"class="col-md-12">
+                    <h5>Terms and conditions: </h5>
+                    <p>Find our terms and conditions <a href="#">here</a>.</p>
+                    <h5>Data Privacy:</h5>
+                    <p>Check our Data Privacy measures <a href="#">here</a> </p>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>

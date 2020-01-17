@@ -1,0 +1,132 @@
+<div class="container" *ngIf="!isDataAvailable">
+        <div class="row">
+          <div id="loader">
+              <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="loading"></div>
+          </div>
+        </div>
+    </div>
+
+<div class="container" *ngIf="isDataAvailable && userType =='individual'">
+  <div class="row">
+    <div class="col-sm-12">
+        <div *ngIf="message" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="text text-center">{{message}}</p> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <h3 class="text text-center"><strong>About You</strong></h3>
+        <hr>
+        <p class="text text-center" [ngClass]="{'negative' : aboutIndividual === 'No About Info' || aboutIndividual === 'No info added'}">{{aboutIndividual}}</p>
+    </div>
+    <div class="col-sm-12">
+        <h3 class="text text-center"><strong>Contacts</strong></h3>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+              <h4 class="text text-center">Primary Contacts</h4>
+              <hr>
+              <mat-list>
+                  <mat-list-item class="text text-center"><mat-icon>phone</mat-icon>+254708731581</mat-list-item>
+                  <mat-list-item class="text text-center"><mat-icon>email</mat-icon>ouko.sherman@gmail.com</mat-list-item>
+               </mat-list>        
+            </div>
+            <div class="col-sm-6">
+                <h4 class="text text-center">Secondary Contacts</h4>
+                <hr>
+                <mat-list >
+                    <mat-list-item class="text text-center"><mat-icon >phone</mat-icon>Phone Number 1 :<div [ngClass]="{'negative' : individualSecondaryPhone === 'No Secondary Phone Info' || individualSecondaryPhone === 'No info added'}">{{individualSecondaryPhone}}</div></mat-list-item>
+                    <mat-list-item class="text text-center"><mat-icon>email</mat-icon>Secondary Email :<div [ngClass]="{'negative' : individualSecondaryEmail === 'No Secondary Email Info' || individualSecondaryEmail === 'No info added'}"> {{individualSecondaryEmail}}</div></mat-list-item>
+                 </mat-list>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 ">
+        <h3 class="text text-center"><strong>Address</strong></h3>
+        <hr>
+        <div class="row" >
+            <div class="col-sm-6">
+              <mat-list>
+                  <mat-list-item class="text text-center"><mat-icon> mail_outline</mat-icon>Postal Address : <div [ngClass]="{'negative' : individualAddress === 'No Address Info' || individualAddress === 'No info added'}">{{individualAddress}}</div></mat-list-item>
+                  <mat-list-item class="text text-center"><mat-icon>place</mat-icon>County : <div [ngClass]="{'negative' : individualCounty === 'No County Info' || individualCounty === 'No info added'}">{{individualCounty}}</div></mat-list-item>      
+              </mat-list>        
+            </div>
+            <div class="col-sm-6">
+                <mat-list>
+                    <mat-list-item class="text text-center"><mat-icon>pin_drop</mat-icon>Area Name :  <div [ngClass]="{'negative' : individualArea === 'No Area Info' || individualArea === 'No info added'}"> {{individualArea}}</div></mat-list-item>
+                    <mat-list-item class="text text-center"><mat-icon>pin_drop</mat-icon>SubCounty :  <div [ngClass]="{'negative' : individualCounty === 'No Subcounty Info' || individualCounty === 'No info added'}"> {{individualSubCounty}}</div></mat-list-item>        
+                </mat-list>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" *ngIf="isDataAvailable && userType == 'company'">
+    <div class="row">
+      <div class="col-sm-12">
+          <div *ngIf="message" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <p class="text text-center">{{message}}</p> 
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <h3 class="text text-center"><strong>About Company</strong></h3>
+          <hr>
+          <p class="text text-center" [ngClass]="{'negative' : aboutCompany === 'No About Info' || aboutCompany === 'No info added'}">{{aboutCompany}}</p>
+      </div>
+      <div class="col-sm-12">
+          <h3 class="text text-center"><strong>Contacts</strong></h3>
+          <hr>
+          <div class="row">
+              <div class="col-sm-6">
+                <h4 class="text text-center">Primary Contacts</h4>
+                <hr>
+                <mat-list>
+                    <mat-list-item class="text text-center"><mat-icon>phone</mat-icon>+254708731581</mat-list-item>
+                    <mat-list-item class="text text-center"><mat-icon>email</mat-icon>ouko.sherman@gmail.com</mat-list-item>
+                 </mat-list>        
+              </div>
+              <div class="col-sm-6">
+                  <h4 class="text text-center">Secondary Contacts</h4>
+                  <hr>
+                  <mat-list >
+                      <mat-list-item class="text text-center"><mat-icon >phone</mat-icon>Phone Number 1 :<div [ngClass]="{'negative' : companySecondaryPhone === 'No Secondary Phone Info' || companySecondaryPhone === 'No info added'}">{{companySecondaryPhone}}</div></mat-list-item>
+                      <mat-list-item class="text text-center"><mat-icon >phone</mat-icon>Phone Number 2 :<div [ngClass]="{'negative' : companyTertiaryPhone === 'No Tertiary Phone Info' || companyTertiaryPhone === 'No info added' }">{{companyTertiaryPhone}}</div></mat-list-item>
+                      <mat-list-item class="text text-center"><mat-icon>email</mat-icon>Secondary Email :<div [ngClass]="{'negative' : companySecondaryEmail === 'No Secondary Email Info' || companySecondaryEmail === 'No info added'}"> {{companySecondaryEmail}}</div></mat-list-item>
+                   </mat-list>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-12 ">
+          <div class="row" >
+              <div class="col-sm-6">
+                <h3 class="text text-center"><strong>Address</strong></h3>
+                <hr>
+                <mat-list>
+                    <mat-list-item class="text text-center"><mat-icon> mail_outline</mat-icon>Postal Address : <div [ngClass]="{'negative' : companyAddress === 'No Address Info' || companyAddress === 'No info added'}">{{companyAddress}}</div></mat-list-item>
+                    <mat-list-item class="text text-center"><mat-icon>place</mat-icon>County : <div [ngClass]="{'negative' : companyHqCounty === 'No HQ Info' || companyHqCounty === 'No info added'}">{{companyHqCounty}}</div></mat-list-item>      
+                </mat-list>        
+              </div>
+              <div class="col-sm-6">
+                <h3 class="text text-center"><strong>Social Media</strong></h3>
+                <hr>
+                <mat-list>
+                    <mat-list-item class="text text-center">Twitter ID :  <div [ngClass]="{'negative' : companyTwitter === 'No Twitter Info'}"> {{companyTwitter}}</div></mat-list-item>
+                    <mat-list-item class="text text-center">Facebook ID :  <div [ngClass]="{'negative' : companyFacebook === 'No Facebook Info' || companyFacebook === 'No info added'}"> {{companyFacebook}}</div></mat-list-item>
+                    <mat-list-item class="text text-center">Instagram ID:  <div [ngClass]="{'negative' : companyInstagram === 'No Instagram Info' || companyInstagram === 'No info added'}"> {{companyInstagram}}</div></mat-list-item>        
+                </mat-list>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>

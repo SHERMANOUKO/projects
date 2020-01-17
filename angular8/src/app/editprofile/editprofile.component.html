@@ -1,0 +1,357 @@
+<div class="row">
+    <div class="col-lg-6 col-sm-12">
+        <button type="button" (click)="showAddProfile()" class="btn btn-success btn-block"><strong >ADD PROFILE</strong></button>
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <button type="button" (click)="showEditProfile()" class="btn btn-info btn-block"><strong >EDIT PROFILE</strong></button>
+    </div>
+</div>
+<hr>
+
+<div class="container" *ngIf="!isDataAvailable">
+        <div class="row">
+          <div id="loader">
+              <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="loading"></div>
+          </div>
+        </div>
+    </div>
+
+<div class="row" *ngIf="addProfile && isDataAvailable">
+    <app-addprofile></app-addprofile>
+</div>
+<div *ngIf="editProfile && isDataAvailable">
+    <div *ngIf="unavailableMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p class="text text-center">{{message}}</p> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container-fluid">
+            <h5 class="text-center bg-secondary">About You</h5>
+            <hr>
+            <div *ngIf="about && returned && message" class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="about && !returned && message" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form *ngIf="userType == 'company'" [formGroup]="editAboutCompany" (ngSubmit)="submitAbout()">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <textarea maxlength="1000" rows="5" formControlName="aboutCompany" class="form-control" [ngClass]="{ 'is-invalid': submitted && editAboutCompany.controls.aboutCompany.errors }"></textarea>
+                            <div *ngIf="submitted && editAboutCompany.controls.aboutCompany.errors" class="invalid-feedback">
+                                <div *ngIf="editAboutCompany.controls.aboutCompany.errors.required">About You is required</div>
+                                <div *ngIf="editAboutCompany.controls.aboutCompany.errors.maxLength">Cannot input more than 1000 characters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activateAbout()" value="enable edit"/>
+            </form>
+            <form *ngIf="userType == 'individual'" [formGroup]="editAboutIndividual" (ngSubmit)="submitAbout()">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <textarea maxlength="1000" rows="5" formControlName="aboutIndividual" class="form-control" [ngClass]="{ 'is-invalid': submitted && editAboutIndividual.controls.aboutIndividual.errors }"></textarea>
+                            <div *ngIf="submitted && editAboutIndividual.controls.aboutIndividual.errors" class="invalid-feedback">
+                                <div *ngIf="editAboutIndividual.controls.aboutIndividual.errors.required">About You is required</div>
+                                <div *ngIf="editAboutIndividual.controls.aboutIndividual.errors.maxLength">Cannot input more than 1000 characters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activateAbout()" value="enable edit"/>
+            </form>
+            <hr>
+        </div>
+        <div class="container-fluid">
+            <h5 class="text text-center bg-secondary">Primary Contacts</h5>
+            <div *ngIf="primaryMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="primary && returned && message" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p class="text text-center">{{message}}</p> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div *ngIf="primary && !returned && message" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p class="text text-center">{{message}}</p> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <hr>
+            <form *ngIf="userType == 'company'" [formGroup]="editPrimaryCompany" (ngSubmit)="submitPrimary()">
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Primary Phone Number</label>
+                            <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && editPrimaryCompany.controls.phoneNumber.errors }" />
+                            <div *ngIf="submitted && editPrimaryCompany.controls.phoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="editPrimaryCompany.phoneNumber.controls.errors.pattern">Enter a valid phone number: 7xxxxxxxx. Must be 9 digits.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Primary Email</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && editPrimaryCompany.controls.email.errors }" />
+                            <div *ngIf="submitted && editPrimaryCompany.controls.email.errors" class="invalid-feedback">
+                                <div *ngIf="editPrimaryCompany.controls.email.errors.required">Email is required.</div>
+                                <div *ngIf="editPrimaryCompany.controls.email.errors.pattern">Enter a valid email.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activatePrimary()" value="enable edit"/>
+            </form>
+            <form *ngIf="userType == 'individual'" [formGroup]="editPrimaryIndividual" (ngSubmit)="submitPrimary()">
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Primary Phone Number</label>
+                            <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && editPrimaryIndividual.controls.phoneNumber.errors }" />
+                            <div *ngIf="submitted && editPrimaryIndividual.controls.errors" class="invalid-feedback">
+                                <div *ngIf="editPrimaryIndividual.controls.phoneNumber.errors.pattern">Enter a valid phone number: 7xxxxxxxx. Must be 9 digits.</div>
+                                <div *ngIf="editPrimaryIndividual.controls.phoneNumber.errors.required">Phone number is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Primary Email</label>
+                            <input type="text" formControlName="email" class="form-control"  [ngClass]="{ 'is-invalid': submitted &&  editPrimaryIndividual.controls.email.errors }" />
+                            <div *ngIf="submitted && editPrimaryIndividual.controls.email.errors" class="invalid-feedback">
+                                <div *ngIf="editPrimaryIndividual.controls.email.errors.pattern">Enter a valid email.</div>
+                                <div *ngIf="editPrimaryIndividual.controls.email.errors.pattern">Email is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activatePrimary()" value="enable edit"/>
+            </form>
+            <hr>
+        </div>
+        <div class="container-fluid">
+            <h5 class="text text-center bg-secondary">Secondary Contacts</h5>
+            <hr>
+            <div *ngIf="secondary && returned && message" class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="secondary && !returned && message" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form *ngIf="userType == 'individual'" [formGroup]="editSecondaryIndividual" (ngSubmit)="submitSecondary()">
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Secondary Phone Number</label>
+                            <input type="text" formControlName="secondaryPhoneNumber" class="form-control"  [ngClass]="{ 'is-invalid': submitted &&  editSecondaryIndividual.controls.secondaryPhoneNumber.errors }" />
+                            <div *ngIf="submitted && editSecondaryIndividual.controls.secondaryPhoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="editSecondaryIndividual.controls.secondaryPhoneNumber.errors.pattern">Enter a valid phone number: 7xxxxxxxx. Must be 9 digits.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Secondary Email</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && editSecondaryIndividual.controls.email.errors }" />
+                            <div *ngIf="submitted && editSecondaryIndividual.controls.email.errors" class="invalid-feedback">
+                                <div *ngIf="editSecondaryIndividual.controls.email.errors.pattern">Enter a valid email.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activateSecondary()" value="enable edit"/>
+            </form>
+            <form *ngIf="userType == 'company'" [formGroup]="editSecondaryCompany" (ngSubmit)="submitSecondary()">
+                <div class="form-row">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Secondary Phone Number</label>
+                            <input type="text" formControlName="secondaryPhoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && editSecondaryCompany.controls.secondaryPhoneNumber.errors }" />
+                            <div *ngIf="submitted && editSecondaryCompany.controls.secondaryPhoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="editSecondaryCompany.controls.secondaryPhoneNumber.errors.pattern">Enter a valid phone number: 7xxxxxxxx. Must be 9 digits.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Tertiary Phone Number</label>
+                            <input type="text" formControlName="tertiaryPhoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && editSecondaryCompany.controls.tertiaryPhoneNumber.errors }" />
+                            <div *ngIf="submitted && editSecondaryCompany.controls.tertiaryPhoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="editSecondaryIndividual.controls.tertiaryPhoneNumber.errors.pattern">Enter a valid phone number: 7xxxxxxxx. Must be 9 digits.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Secondary Email</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && editSecondaryCompany.controls.phoneNumber.errors }" />
+                            <div *ngIf="submitted && editSecondaryCompany.controls.email.errors" class="invalid-feedback">
+                                <div *ngIf="editSecondaryCompany.controls.email.errors.pattern">Enter a valid phone number: 7xxxxxxxx. Must be 9 digits.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activateSecondary()" value="enable edit"/>
+            </form>
+            <hr>
+        </div>
+        <div class="container-fluid">
+            <h5 class="text text-center bg-secondary">Addresses</h5>
+            <hr>
+            <div *ngIf="address && returned && message" class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="address && !returned && message" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form *ngIf="userType == 'individual'" [formGroup]="editAddressIndividual" (ngSubmit)="submitAddress()">
+                <div class="form-row">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label>County</label>
+                            <input type="text" formControlName="county" class="form-control" [ngClass]="{ 'is-invalid': submitted && editAddressIndividual.controls.county.errors }" />
+                            <div *ngIf="submitted && editAddressIndividual.controls.county.errors" class="invalid-feedback">
+                                <div *ngIf="editAddressIndividual.controls.county.errors.required">County is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label>Subcounty</label>
+                            <input type="text" formControlName="subCounty" class="form-control" [ngClass]="{ 'is-invalid': submitted && editAddressIndividual.controls.subCounty.errors }" />
+                            <div *ngIf="submitted && editAddressIndividual.controls.subCounty.errors" class="invalid-feedback">
+                                <div *ngIf="editAddressIndividual.controls.subCounty.errors.required">Sub county is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label>Area Name</label>
+                            <input type="text" formControlName="area" class="form-control" [ngClass]="{ 'is-invalid': submitted && editAddressIndividual.controls.area.errors }" />
+                            <div *ngIf="submitted && editAddressIndividual.controls.area.errors" class="invalid-feedback">
+                                <div *ngIf="editAddressIndividual.controls.area.errors.required">Sub County is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea cols="5" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && editAddressIndividual.controls.address.errors }"></textarea>
+                            <div *ngIf="submitted && editAddressIndividual.controls.address.errors" class="invalid-feedback">
+                                <div *ngIf="editAddressIndividual.controls.address.errors.required">Address is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activateAddress()" value="enable edit"/>
+            </form>
+            <form *ngIf="userType == 'company'" [formGroup]="editAddressCompany" (ngSubmit)="submitAddress()">
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>County</label>
+                            <input type="text" formControlName="companyCounty" class="form-control" placeholder="7xxxxxxxx" [ngClass]="{ 'is-invalid': submitted && editAddressCompany.controls.companyCounty.errors }" />
+                            <div *ngIf="submitted && editAddressCompany.controls.companyCounty.errors" class="invalid-feedback">
+                                <div *ngIf="editAddressCompany.controls.companyCounty.errors.required">County is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea cols="5" formControlName="companyAddress" class="form-control" [ngClass]="{ 'is-invalid': submitted && editAddressCompany.controls.address.errors }"></textarea>
+                            <div *ngIf="submitted && editAddressCompany.controls.companyAddress.errors" class="invalid-feedback">
+                                <div *ngIf="editAddressCompany.controls.companyAddress.errors.required">Address is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activateAddress()" value="enable edit"/>
+            </form>
+            <hr>
+        </div>
+        <div *ngIf="userType == 'company'"  class="container-fluid">
+            <h5 class="text text-center bg-secondary">Social Media</h5>
+            <hr>
+            <div *ngIf="social && returned && message" class="alert alert-success alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="social && !returned && message" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="text text-center">{{message}}</p> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="editSocialmediaCompany" (ngSubmit)="submitSocial()">
+                <div class="form-row">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Facebook ID</label>
+                            <input type="text" formControlName="companyFacebook" class="form-control" [ngClass]="{ 'is-invalid': submitted && editSocialmediaCompany.controls.companyFacebook.errors }" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Instagram ID</label>
+                            <input type="text" formControlName="companyInstagram" class="form-control" [ngClass]="{ 'is-invalid': submitted && editSocialmediaCompany.controls.companyInstagram.errors }" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Twitter ID</label>
+                            <input type="text" formControlName="companyTwitter"  class="form-control" placeholder="7xxxxxxxx" [ngClass]="{ 'is-invalid': submitted && editSocialmediaCompany.controls.companyTwitter.errors }" />
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-success">Submit</button>&nbsp;
+                <input type="button" class="btn btn-sm btn-danger" (click)="activateSocial()" value="enable edit"/>
+            </form>
+        </div>
+</div>
+
+

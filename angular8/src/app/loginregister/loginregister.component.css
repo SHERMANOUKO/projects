@@ -1,0 +1,53 @@
+.navbar{
+    background-color: #A9A9A9;
+}
+.navbar-light .navbar-nav .nav-link {
+    color:white;
+}
+.active{
+    background-color: grey;
+}
+
+#logo{
+    width: 140px;
+    height: 40px;
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto; */
+}
+#mailSubscription{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+#subscribe{
+    /* width:50%; */
+    margin-left:auto;
+    margin-right:auto;
+}
+
+footer{
+    color: white;
+    padding: 3%;
+    background-color:#696969;
+    text-decoration: none;
+}
+
+footer mat-icon{
+    float: left;
+}
+
+footer a:link{
+    text-decoration: none;
+}
+
+#sell {
+    display: none;
+  }
+
+@media (max-width: 568px) {
+    #sell {
+      display: block;
+    }
+    
+}

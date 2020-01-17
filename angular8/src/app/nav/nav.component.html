@@ -1,0 +1,110 @@
+<div class="container" *ngIf="!load">
+    <div class="row">
+      <div id="loader">
+          <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="loading"></div>
+      </div>
+    </div>
+</div>
+
+<div id="content-holder" *ngIf="load">
+  <div id="allcontent">
+    <nav class="navbar navbar-expand-sm navbar-light sticky-top" style="background-color:#800080;">
+      <a class="navbar-brand text text-white" href="#">{{appTitle}}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2 col-sm-3 bg-warning" id="navcontent">
+          <div class="row" id="imageplace">
+            <div class="col-lg-12">
+                <img class="img-fluid" data-target="#profileImageModal" data-toggle="modal" src="{{imageBlobUrl}}" id="profileImage" onError="this.src='/assets/images/index.png';"  alt="..."  >
+                <div class="bottom-right" data-target="#profileImageModal" data-toggle="modal"><button>Edit</button></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-sm">
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                      <mat-list >
+                        <mat-list-item><a class="text text-white" routerLinkActive='active' routerLink="/home">Home</a></mat-list-item>
+                        <mat-list-item><a class="text text-white" routerLinkActive='active' routerLink="/viewprofile">View Profile</a></mat-list-item>
+                        <mat-list-item><a class="text text-white" routerLinkActive='active' routerLink="/editprofile">Profile</a></mat-list-item>
+                        <mat-list-item><a class="text text-white" routerLinkActive='active' routerLink="/editpassword">Password</a></mat-list-item>
+                        <mat-list-item><a class="text text-white" routerLinkActive='active' routerLink="/deleteaccount">Delete Acc</a></mat-list-item>
+                        <mat-list-item><a class="text text-white" routerLinkActive='active' routerLink="/support">Support</a></mat-list-item>
+                        <mat-list-item><button class="btn btn-danger" (click)="logOut()">Log Out</button></mat-list-item>
+                      </mat-list>
+                  </div>
+                </nav>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-10 col-sm-9">
+            <div id="flexible">
+              <div class="container" id="noblur" style="min-height: 100vh;">
+                <div *ngIf="!photo" class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <p class="text text-center">{{message}}</p>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                <router-outlet ></router-outlet>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <form [formGroup]="editImageForm" (ngSubmit)="onSubmit()">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Upload Image</h5>
+                <div class="spinner-border text-success" *ngIf="dataspin"></div>
+              </div>
+              <div class="modal-body">
+                  <div *ngIf="update && reloadPage" class="alert alert-success alert-dismissible fade show" role="alert">
+                      <p class="text text-center">{{update}}</p> 
+                  </div>
+                  <div *ngIf="update && !reloadPage" class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <p class="text text-center">{{update}}</p> 
+                  </div>
+                <div class="form-row">
+                  <div class="col-lg-12">
+                      <div class="form-group">
+                          <label>Profile Photo</label>
+                          <input type="file" accept="image/*" (change)="onSelect(file.files,file)" #file formControlName="file" class="form-control-file" [ngClass]="{ 'is-invalid': submitted && f.file.errors }" />
+                          <div *ngIf="submitted && f.file.errors" class="invalid-feedback">
+                              <div *ngIf="f.file.errors.required">Profile photo is required</div>
+                              <div *ngIf="f.file.errors.limitSize">File size should be less than 5mb</div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="reload()"data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </form>
+    </div>   
+  </div>
+  <footer>
+    <p class="text text-center"> &copy;<a href="fibonaccilimited@gmail.com">Fibonacci Limited</a>.</p>
+  </footer>
+</div>
+
+
+

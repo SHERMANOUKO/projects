@@ -1,0 +1,72 @@
+#register {
+    background-image: url("/assets/images/backgound.jpeg");
+    background-size: cover;
+    background-position: center center;
+    /* height: 100vh; */
+    background-attachment: fixed;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    /* z-index:-1; */
+    /* text-align: center; */
+  
+}
+#toggleLog{
+    padding-top: 10px; 
+    /* left: 10px" */
+    text-align: center;
+}
+
+#terms {
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    background-color: rgba(252, 250, 250, 0.687);
+    position: relative;
+    height: 100%;
+    top: 10px; left:10px;
+}
+#reg {
+    border: 1px solid #f1f1f1;
+    border-radius: 15px;
+    background-color: rgba(252, 250, 250, 0.527);
+    margin-bottom: 3%;
+    margin-top: 2%;
+    margin-left: 5%;
+}
+.row {
+    height: 100%;
+    width : 100%;
+}
+ul > li{
+    text-align: left;
+}
+label {
+    /* border: 1px solid #f1f1f1; */
+    border-radius: 4px;
+    background-color: rgba(250, 248, 248, 0.692);
+    font-size: 12px;
+    padding: 4px;
+}
+#formButtons{
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo{
+    width: 40%;
+    height: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (max-width: 568px) {
+    #terms {
+      display: none;
+    }
+    
+}
+@media (min-width: 568px) {
+    #mobileTerms {
+        display: none;
+    }
+}
+

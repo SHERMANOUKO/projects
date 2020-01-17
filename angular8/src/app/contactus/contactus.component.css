@@ -1,0 +1,14 @@
+
+#contactUsTop{
+    background-image: url("/assets/images/landb.jpg");
+    background-size: cover;
+    /* background-position-y: absolute; */
+    width: 100%;
+    height: 250px;
+    text-align: center;
+    padding-top: 5%;
+}
+
+#contactus{
+    min-height: 500px;
+}

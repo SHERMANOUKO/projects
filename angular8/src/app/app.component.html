@@ -1,0 +1,24 @@
+<app-nav 
+    *ngIf="!(
+        router.url === '/login' || 
+        (route.snapshot.queryParams['key'] && route.snapshot.queryParams['email']) ||
+        router.url === '/register' || 
+        router.url === '/'||
+        router.url === '/contactus' ||
+        router.url === '/faqs' ||
+        router.url === '/search' ||
+        route.snapshot.queryParams['search']
+    )">
+</app-nav>
+<app-loginregister 
+    *ngIf="(
+        router.url === '/login'  || 
+        (route.snapshot.queryParams['key'] && route.snapshot.queryParams['email']) || 
+        router.url === '/register' || 
+        router.url==='/' ||
+        router.url === '/contactus' ||
+        router.url === '/faqs' ||
+        router.url === '/search' ||
+        route.snapshot.queryParams['search']
+    )">
+</app-loginregister>

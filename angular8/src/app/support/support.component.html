@@ -1,0 +1,40 @@
+<div class="container" >
+    <div class="row">
+        <div class="col-md-6 offset-md-3" id="forma">
+            <h3 class="text text-center">Contact Support</h3>
+            <hr>
+            <p class="text text-center">Send us your concerns, queries , appreciations or what you want us to hear !</p>
+            <div *ngIf="succesful === 1 " class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!! </strong> Message succesfully sent.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="succesful === 0" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Invalid!! </strong> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="succesful === 2" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Invalid!! </strong> Unable to contact server at this time. Is your session expired? Login and try again. If problem persists contact support via their number or direct mail.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea formControlName="messageMessage" maxlength="500" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.messageMessage.errors }" placeholder="Message should not exceed 500 characters" ></textarea>
+                    <div *ngIf="submitted && f.messageMessage.errors" class="invalid-feedback">
+                        <div *ngIf="f.messageMessage.errors.required">Message is required</div>
+                        <div *ngIf="f.messageMessage.errors.maxLength">Message cannot exceed 500 characters. Please call or email us if your enquiry is detailed</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
