@@ -1,0 +1,10 @@
+amqp==1.4.9
+anyjson==0.3.3
+asgiref==3.2.3
+billiard==3.3.0.23
+celery==3.1.18
+Django==3.0.2
+kombu==3.0.37
+pytz==2019.3
+redis==2.10.3
+sqlparse==0.3.0
