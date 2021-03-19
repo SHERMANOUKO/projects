@@ -1,7 +1,7 @@
 Django==2.2.3
 gunicorn[gevent]==19.9.0
 django-cors-headers==3.0.2
-djangorestframework==3.10.1
+djangorestframework==3.11.2
 packaging==19.1
 drf-yasg==1.16.1
 bcrypt==3.1.7
