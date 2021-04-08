@@ -3,7 +3,7 @@ anyjson==0.3.3
 asgiref==3.2.3
 billiard==3.3.0.23
 celery==3.1.18
-Django==3.0.2
+Django==3.0.14
 kombu==3.0.37
 python-http-client==3.2.1
 pytz==2019.3
