@@ -8,5 +8,5 @@ bcrypt==3.1.7
 mysqlclient==1.4.4
 boto3==1.9.246
 django-storages==1.7.2
-Pillow==5.0.0
+Pillow==9.3.0
 django-filter==2.2.0
